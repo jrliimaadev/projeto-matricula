@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-Matrícula EJA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .topo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .topo img {
+            max-width: 250px;
+            height: auto;
+        }
+
+        .topo h2 {
+            margin: 10px 0 5px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .topo p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            padding: 5px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .alerta {
+            color: red;
+            font-weight: bold;
+            margin-top: -10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="topo">
+            <img src="{{ url_for('static', filename='logo.jpeg') }}" alt="Logo EJA">
+            <h2>Melhor EJA do Brasil do Professor Moraes</h2>
+            <p>Estamos no mercado há 10 anos com mais de 9 mil alunos formados!</p>
+        </div>
+
+        <h1>Formulário de Pré-Matrícula</h1>
+        <form action="/sucesso" method="post" enctype="multipart/form-data">
+            <label>Nome Completo:</label>
+            <input type="text" name="nome_completo" required>
+
+            <label>Endereço:</label>
+            <input type="text" name="endereco" required>
+
+            <label>CEP:</label>
+            <input type="text" name="cep" required>
+
+            <label>CPF:</label>
+            <input type="text" name="cpf" required>
+
+            <label>RG:</label>
+            <input type="text" name="rg" required>
+
+            <label>Data de Nascimento:</label>
+            <input type="date" name="data_nascimento" required>
+
+            <label>Cidade onde nasceu:</label>
+            <input type="text" name="cidade_nascimento" required>
+
+            <label>Estado onde nasceu:</label>
+            <input type="text" name="estado_nascimento" required>
+
+            <label>Tipo do certificado:</label>
+            <select name="tipo_certificado" required>
+                <option value="Ensino Fundamental e Médio">Ensino Fundamental e Médio</option>
+                <option value="Ensino Médio">Ensino Médio</option>
+            </select>
+
+            <label>Plano EJA:</label>
+            <select name="plano_eja" required>
+                <option value="EJA 30 Dias">EJA 30 Dias</option>
+                <option value="EJA 10 Dias">EJA 10 Dias</option>
+                <option value="EJA 7 Dias">EJA 7 Dias</option>
+            </select>
+
+            <label>Documento com foto - Frente:</label>
+            <input type="file" name="documento_frente" accept="image/*" required>
+
+            <label>Documento com foto - Verso:</label>
+            <input type="file" name="documento_verso" accept="image/*" required>
+
+            <p class="alerta">⚠️ A foto precisa estar legível!!</p>
+
+            <!-- ... topo e estilos continuam os mesmos -->
+
+            <label>Quem foi seu consultor?</label>
+            <select name="consultor" required>
+                <option value="Thalita">Thalita</option>
+                <option value="Maria">Maria</option>
+            </select>
+
+
+            <button type="submit">Fazer Pré-Matrícula</button>
+        </form>
+    </div>
+</body>
+</html>

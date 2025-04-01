@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Matrículas</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }
+        .container { max-width: 900px; margin: 30px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 12px rgba(0,0,0,0.1); }
+        h2 { text-align: center; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid #ccc; padding: 12px; text-align: center; }
+        th { background-color: #28a745; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Relatório de Matrículas por Mês e Consultora</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mês</th>
+                    <th>Consultora</th>
+                    <th>Total de Matrículas</th>
+                    <th>Valor Arrecadado</th>
+                    <th>Comissão (10%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for linha in relatorio.itertuples() %}
+                <tr>
+                    <td>{{ linha.mes_ano }}</td>
+                    <td>{{ linha.consultor }}</td>
+                    <td>{{ linha.total_matriculas }}</td>
+                    <td>R$ {{ "%.2f"|format(linha.valor_total) }}</td>
+                    <td>R$ {{ "%.2f"|format(linha.comissao) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

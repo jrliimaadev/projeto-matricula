@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-Matrícula Concluída</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #28a745;
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .matricula {
+            font-size: 24px;
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .pix-info {
+            background-color: #eee;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .urgencia {
+            color: red;
+            font-weight: bold;
+            margin-top: 25px;
+            font-size: 18px;
+        }
+
+        #cronometro {
+            font-size: 22px;
+            color: red;
+        }
+
+        .whatsapp-button {
+            background-color: #25D366;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #1ebc5b;
+        }
+    </style>
+    <script>
+        function iniciarCronometro() {
+            let tempo = 60 * 60; // 60 minutos em segundos
+            const cronometro = document.getElementById('cronometro');
+
+            const timer = setInterval(() => {
+                const minutos = Math.floor(tempo / 60);
+                const segundos = tempo % 60;
+                cronometro.textContent = `${minutos}m ${segundos < 10 ? '0' : ''}${segundos}s`;
+
+                if (--tempo < 0) {
+                    clearInterval(timer);
+                    cronometro.textContent = 'Tempo esgotado!';
+                }
+            }, 1000);
+        }
+
+        window.onload = iniciarCronometro;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>🎉 Parabéns!</h1>
+        <p>Você concluiu sua <strong>PRÉ-MATRÍCULA</strong> com sucesso.</p>
+
+        <p class="matricula">Número de Matrícula: {{ numero_matricula }}</p>
+
+        <div class="pix-info">
+            <p><strong>Pagamento via PIX</strong></p>
+            <p>🔸 Nome: <strong>JOSÉ GIVANILDO DE LIMA JÚNIOR</strong></p>
+            <p>🔸 PIX (CPF): <strong>100.817.484-00</strong></p>
+            <p>🔸 Banco: <strong>Nubank</strong></p>
+        </div>
+
+        <p class="urgencia">⏰ Você tem <span id="cronometro"></span> para realizar o pagamento e enviar o comprovante!</p>
+        <p class="urgencia">🚨 Corra! Essa é sua chance de mudar sua história e concluir seus estudos! 🚀</p>
+
+        <a id="botaoWhatsapp" class="whatsapp-button" href="{{ link_whatsapp }}" target="_blank">
+            📤 Enviar comprovante via WhatsApp
+        </a>
+    </div>
+</body>
+</html>

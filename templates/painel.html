@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel de Matrículas</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        .top-bar { background-color: #28a745; color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .top-bar a { color: white; margin-left: 15px; text-decoration: none; font-weight: bold; }
+        .container { width: 95%; margin: 20px auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        th { background-color: #28a745; color: white; }
+        .btn { padding: 5px 10px; border: none; border-radius: 5px; cursor: pointer; }
+        .btn-confirmar { background-color: #007bff; color: white; }
+        .btn-excluir { background-color: #dc3545; color: white; }
+        .btn-declaracao { background-color: #17a2b8; color: white; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div><strong>Bem-vinda, {{ usuario }}</strong></div>
+        <div>
+            <a href="/relatorios">Relatórios</a>
+            <a href="/logout">Sair</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Painel de Matrículas</h2>
+        <!-- Tabela aqui -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Nº Matrícula</th>
+                    <th>Data Matrícula</th>
+                    <th>Consultor</th>
+                    <th>Frente</th>
+                    <th>Verso</th>
+                    <th>Plano</th>
+                    <th>Valor Pago</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in matriculas %}
+                <tr>
+                    <td>{{ m[1] }}</td>
+                    <td>{{ m[12] }}</td>
+                    <td>{{ m[16] }}</td>
+                    <td>{{ m[11] }}</td>
+                    <td><a href="/uploads/frente/{{ m[13] }}" target="_blank">Ver Frente</a></td>
+                    <td><a href="/uploads/verso/{{ m[14] }}" target="_blank">Ver Verso</a></td>
+                    <td>{{ m[10] }}</td>
+                    <td>
+                        {% if m[17] %}
+                            R$ {{ m[17] }}
+                        {% else %}
+                            <form action="/inserir_valor/{{ m[0] }}" method="POST" style="display: inline-block;">
+                                <input type="text" name="valor_pago" style="width: 60px;" required>
+                                <button type="submit">💾</button>
+                            </form>
+                        {% endif %}
+                    </td>
+                    <td>{{ m[15] }}</td>
+                    <td>
+                        {% if m[15] == 'Não pago' %}
+                            <a href="/confirmar_pagamento/{{ m[0] }}" class="btn btn-confirmar">Confirmar</a>
+                        {% endif %}
+                        <a href="/excluir/{{ m[0] }}" class="btn btn-excluir">Excluir</a>
+                        {% if m[15] == 'Pago' %}
+                            <a href="/gerar_declaracao/{{ m[0] }}" class="btn btn-declaracao">Gerar Declaração</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
